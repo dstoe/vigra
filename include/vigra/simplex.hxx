@@ -84,6 +84,7 @@ class Facet
         std::copy(mat.template bind<1>(dimension).begin(),
                   mat.template bind<1>(dimension).end(),
                   normal_.begin());
+        normal_ /= norm(normal_);
     }
 
     const RealPoint& normal() const
