@@ -66,23 +66,23 @@ struct UnitMatrix {
 
 struct SimplexTest
 {
-    typedef vigra::TinyVector<double, 1> Vector1;
-    typedef vigra::TinyVector<double, 2> Vector2;
-    typedef vigra::TinyVector<double, 3> Vector3;
-    typedef vigra::Simplex<Vector1> Simplex1;
-    typedef vigra::Simplex<Vector2> Simplex2;
-    typedef vigra::Simplex<Vector3> Simplex3;
-    typedef vigra::Facet<Vector2> Facet2;
-    typedef vigra::Facet<Vector3> Facet3;
+    typedef TinyVector<double, 1> Vector1;
+    typedef TinyVector<double, 2> Vector2;
+    typedef TinyVector<double, 3> Vector3;
+    typedef Simplex<1, double> Simplex1;
+    typedef Simplex<2, double> Simplex2;
+    typedef Simplex<3, double> Simplex3;
+    typedef FacetView<2, double> Facet2;
+    typedef FacetView<3, double> Facet3;
 
     template <int N>
-    vigra::Simplex<vigra::TinyVector<double, N> > makeSimplex()
+    Simplex<N, double> makeSimplex()
     {
-        typedef typename vigra::TinyVector<double, N> Vector;
-        typename vigra::ArrayVector<Vector> vertices(N + 1, Vector());
+        typedef TinyVector<double, N> Vector;
+        ArrayVector<Vector> vertices(N + 1, Vector());
         std::generate(vertices.begin(), vertices.end(), UnitMatrix<Vector>());
 
-        vigra::Simplex<Vector> ret(vertices.begin(), vertices.end());
+        Simplex<N,double> ret(vertices.begin(), vertices.end());
         shouldEqual(ret.size(), N + 1);
         return ret;
     }
